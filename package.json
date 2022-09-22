@@ -2,8 +2,8 @@
   "name": "@kori/hermes",
   "description": "make a fast requests and simplify your code",
   "version": "1.0.1",
-  "main": "Index.js",
-  "types": "Index.d.ts",
+  "main": "./lib/Index.js",
+  "types": "./lib/Index.d.ts",
   "license": "MIT",
   "type": "module",
   "keywords": [
@@ -36,6 +36,10 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node ."
+  },
+  "engines": {
+    "node": ">=16.15.0",
+    "npm": ">=8.5.5"
   }
 }
