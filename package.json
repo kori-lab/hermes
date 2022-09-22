@@ -1,5 +1,5 @@
 {
-  "name": "@kori/hermes",
+  "name": "@kori_xyz/hermes",
   "description": "make a fast requests and simplify your code",
   "version": "1.0.0",
   "main": "./lib/Index.js",
