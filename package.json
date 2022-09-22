@@ -18,11 +18,9 @@
     "automatic json parser",
     "media support"
   ],
-  "author": {
-    "email": "korinamez@gmail.com",
-    "name": "Kori"
-  },
+  "author": "Kori <korinamez@gmail.com>",
   "dependencies": {
     "user-agents": "^1.0.1146"
-  }
+  },
+  "repository": "https://github.com/kori-lab/hermes.git"
 }
