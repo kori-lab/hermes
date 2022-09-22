@@ -1,0 +1,11 @@
+{
+  "name": "native-request",
+  "version": "1.0.0",
+  "main": "Index.js",
+  "types": "Index.d.ts",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "user-agents": "^1.0.1146"
+  }
+}
