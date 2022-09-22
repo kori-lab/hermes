@@ -1,5 +1,5 @@
 {
-  "name": "hermes",
+  "name": "@kori/hermes",
   "description": "make a fast requests and simplify your code",
   "version": "1.0.0",
   "main": "Index.js",
@@ -22,5 +22,20 @@
   "dependencies": {
     "user-agents": "^1.0.1146"
   },
-  "repository": "https://github.com/kori-lab/hermes.git"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kori-lab/hermes.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kori-lab/hermes/issues"
+  },
+  "homepage": "https://github.com/kori-lab/hermes#readme",
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
