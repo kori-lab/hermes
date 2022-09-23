@@ -2,13 +2,17 @@
     <img src="https://images.vexels.com/media/users/3/190673/isolated/preview/6c2710b0ba8104a74f20b22ce0d93cb6-curso-grego-deus-hermes.png" />
     <h1>powerful and fast</h1>
     <small>Make simple and fast stealth requests, supporting the recently tls versions and any proxies (auth/port:ip). having feature for random user-agents to make better stealth request</small>
+</div>
 
 [![npm version](https://img.shields.io/npm/v/@kori_xyz/hermes.svg)](https://www.npmjs.org/package/@kori_xyz/hermes)
 [![code coverage](https://img.shields.io/coveralls/mzabriskie/@kori_xyz/hermes.svg)](https://coveralls.io/r/mzabriskie/@kori_xyz/hermes)
 [![install size](https://img.shields.io/github/size/kori-lab/hermes)](https://img.shields.io/github/size/kori-lab/hermes)
 [![npm downloads](https://img.shields.io/npm/dm/@kori_xyz/hermes.svg)](https://npm-stat.com/charts.html?package=@kori_xyz/hermes)
 [![Known Vulnerabilities](https://snyk.io/test/npm/@kori_xyz/hermes/badge.svg)](https://snyk.io/test/npm/@kori_xyz/hermes)
-</div>
+[![Code quality](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)
+
+<br />
+
 ## Install
 > Available for any computer running [nodejs](https://nodejs.org/)
 
