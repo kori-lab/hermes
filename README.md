@@ -3,30 +3,48 @@
     <h1>powerful and fast</h1>
     <small>Make simple and fast stealth requests, supporting the recently tls versions and any proxies (auth/port:ip). having feature for random user-agents to make better stealth request</small>
 </div>
+<div align="center">
 
 [![npm version](https://img.shields.io/npm/v/@kori_xyz/hermes.svg)](https://www.npmjs.org/package/@kori_xyz/hermes)
 [![Coverage Status](https://coveralls.io/repos/github/kori-lab/hermes/badge.svg?branch=main)](https://coveralls.io/github/kori-lab/hermes?branch=main)
 [![install size](https://img.shields.io/github/repo-size/kori-lab/hermes)](https://img.shields.io/github/repo-size/kori-lab/hermes)
 [![npm downloads](https://img.shields.io/npm/dm/@kori_xyz/hermes.svg)](https://npm-stat.com/charts.html?package=@kori_xyz/hermes)
 [![Known Vulnerabilities](https://snyk.io/test/npm/@kori_xyz/hermes/badge.svg)](https://snyk.io/test/npm/@kori_xyz/hermes)
-[![Code quality](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)
+
+</div>
 
 <br />
 
+## Features
+
+- [x] Proxy
+  - [x] Http(s)
+  - [ ] Socks4/5
+- [ ] Support [Http2](https://support.cloudflare.com/hc/en-us/articles/200168076-Understanding-Cloudflare-HTTP-2-and-HTTP-3-Support#6ncFUWOVRaVtPzYN1euBIC)
+- [x] Support TLS 1.3, [as even Cloudflare said](https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/) _"In a nutshell, TLS 1.3 is faster and more secure than TLS 1.2"_
+- [x] Automatic request/payload data parse
+- [x] Random user agent _(incrase stealth)_
+- [x] Requesting `https`, `http` protocols and any method
+- [ ] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) _(comming soon)_
+
 ## Install
+
 > Available for any computer running [nodejs](https://nodejs.org/)
 
 yarn
+
 ```bash
 yarn add @kori_xyz/hermes
 ```
 
-npm 
+npm
+
 ```bash
 npm install @kori_xyz/hermes
 ```
 
 ## Examples
+
 > this module is avaliable for CommonJS or ESM/Typescript
 
 ### CommonJS
@@ -155,24 +173,25 @@ console.log(response.headers["content-type"], response.data.length);
   // `headers` are custom headers to be sent
   headers: {'X-Requested-With': 'XMLHttpRequest'},
 
-  // `data` is the data to be sent as the request body
+  // `payload` is the data to be sent as the request body
   // Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
   // When no `transformRequest` is set, must be of one of the following types:
-  // - string, plain object, ArrayBuffer, ArrayBufferView, URLSearchParams
-  // - Browser only: FormData, File, Blob
-  // - Node only: Stream, Buffer
-  data: {
+  // - string, plain object
+  payload: {
     firstName: 'Fred'
   },
 
-  // syntax alternative to send data into the body
+  // syntax alternative to send payload into the body
   // method post
   // only the value is sent, not the key
-  data: 'Country=Foo&City=Bar',
+  payload: 'Country=Foo&City=Bar',
 
   // `timeout` specifies the number of milliseconds before the request times out.
   // If the request takes longer than `timeout`, the request will be aborted.
   timeout: 1000, // default is `5000` (5 seconds)
+
+  // puts a random user agent for the requesting
+  randomUserAgent: false, // default is `false`
 
   // `proxy` defines the hostname, port, and protocol of the proxy server.
   // You can also define your proxy using the conventional `http_proxy` and
@@ -192,8 +211,12 @@ console.log(response.headers["content-type"], response.data.length);
     username: 'foo',
     password: 'bar'
   },
+
+   // support string, automatic parse
+  proxy: 'foo:bar@127.0.0.1:80',
 }
 ```
+
 ## License
 
 This project is licensed under the MIT - see the [LICENSE](https://github.com/kori-lab/fivem-lookup/blob/main/LICENSE) file for details.
