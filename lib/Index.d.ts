@@ -33,38 +33,32 @@ declare interface HermesJsonProxy {
   password?: string;
 }
 
-type MethodsHeaders = {
-  [Key in Method as Lowercase<Key>]: HermesHeaders;
-};
-
-export type Method =
-  | "get"
-  | "GET"
-  | "delete"
-  | "DELETE"
-  | "head"
-  | "HEAD"
-  | "options"
-  | "OPTIONS"
-  | "post"
-  | "POST"
-  | "put"
-  | "PUT"
-  | "patch"
-  | "PATCH"
-  | "purge"
-  | "PURGE"
-  | "link"
-  | "LINK"
-  | "unlink"
-  | "UNLINK";
-
 declare interface HermesRequestOptions {
   url: string;
   port?: number;
-  method?: MethodsHeaders;
-  headers?: Headers;
-  payload?: string | JSON;
+  method?:
+    | "get"
+    | "GET"
+    | "delete"
+    | "DELETE"
+    | "head"
+    | "HEAD"
+    | "options"
+    | "OPTIONS"
+    | "post"
+    | "POST"
+    | "put"
+    | "PUT"
+    | "patch"
+    | "PATCH"
+    | "purge"
+    | "PURGE"
+    | "link"
+    | "LINK"
+    | "unlink"
+    | "UNLINK";
+  headers?: {};
+  payload?: string | {};
   proxy?: string | HermesJsonProxy;
   timeout?: number;
   randomUserAgent?: boolean;

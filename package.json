@@ -1,13 +1,15 @@
 {
   "name": "@kori_xyz/hermes",
   "description": "make a fast requests and simplify your code",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "license": "MIT",
   "type": "module",
   "keywords": [
     "request",
+    "powerful",
+    "stealth",
     "simple",
     "simple request",
     "fast request",

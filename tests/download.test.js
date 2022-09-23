@@ -1,4 +1,4 @@
-import Request from "../lib/functions/Request.js";
+import Hermes from "@kori_xyz/hermes";
 import { writeFileSync } from "fs";
 
 const response = await Request({
