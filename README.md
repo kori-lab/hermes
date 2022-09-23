@@ -6,7 +6,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@kori_xyz/hermes.svg)](https://www.npmjs.org/package/@kori_xyz/hermes)
 [![Coverage Status](https://coveralls.io/repos/github/kori-lab/hermes/badge.svg?branch=main)](https://coveralls.io/github/kori-lab/hermes?branch=main)
-[![install size](https://img.shields.io/github/size/kori-lab/hermes)](https://img.shields.io/github/size/kori-lab/hermes)
+[![install size](https://img.shields.io/github/repo-size/kori-lab/hermes)](https://img.shields.io/github/repo-size/kori-lab/hermes)
 [![npm downloads](https://img.shields.io/npm/dm/@kori_xyz/hermes.svg)](https://npm-stat.com/charts.html?package=@kori_xyz/hermes)
 [![Known Vulnerabilities](https://snyk.io/test/npm/@kori_xyz/hermes/badge.svg)](https://snyk.io/test/npm/@kori_xyz/hermes)
 [![Code quality](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)](https://img.shields.io/npms-io/quality-score/@kori_xyz/hermes)
