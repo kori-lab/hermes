@@ -175,7 +175,7 @@ console.log(response.headers["content-type"], response.data.length);
 
   // `payload` is the data to be sent as the request body
   // Only applicable for request methods 'PUT', 'POST', 'DELETE , and 'PATCH'
-  // When no `transformRequest` is set, must be of one of the following types:
+  // must be of one of the following types:
   // - string, plain object
   payload: {
     firstName: 'Fred'
@@ -191,7 +191,7 @@ console.log(response.headers["content-type"], response.data.length);
   timeout: 1000, // default is `5000` (5 seconds)
 
   // puts a random user agent for the requesting
-  randomUserAgent: false, // default is `false`
+  randomUserAgent: true, // default is `false`
 
   // `proxy` defines the hostname, port, and protocol of the proxy server.
   // You can also define your proxy using the conventional `http_proxy` and
