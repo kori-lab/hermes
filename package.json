@@ -1,7 +1,7 @@
 {
   "name": "@kori_xyz/hermes",
   "description": "make a fast requests and simplify your code",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "license": "MIT",
