@@ -20,7 +20,7 @@
 - [x] Proxy
   - [x] Http(s)
   - [ ] Socks4/5
-- [ ] Support [Http2](https://support.cloudflare.com/hc/en-us/articles/200168076-Understanding-Cloudflare-HTTP-2-and-HTTP-3-Support#6ncFUWOVRaVtPzYN1euBIC)
+- [x] Support [Http2](https://support.cloudflare.com/hc/en-us/articles/200168076-Understanding-Cloudflare-HTTP-2-and-HTTP-3-Support#6ncFUWOVRaVtPzYN1euBIC)
 - [x] Support TLS 1.3, [as even Cloudflare said](https://www.cloudflare.com/learning/ssl/why-use-tls-1.3/) _"In a nutshell, TLS 1.3 is faster and more secure than TLS 1.2"_
 - [x] Automatic request/payload data parse
 - [x] Random user agent _(incrase stealth)_
@@ -214,6 +214,9 @@ console.log(response.headers["content-type"], response.data.length);
 
    // support string, automatic parse
   proxy: 'foo:bar@127.0.0.1:80',
+
+  // support http2
+  http2: false // defaults
 }
 ```
 
