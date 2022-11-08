@@ -25,7 +25,7 @@
 - [x] Automatic request/payload data parse
 - [x] Random user agent _(incrase stealth)_
 - [x] Requesting `https`, `http` protocols and any method
-- [x] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) `🆕`
+- [x] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) 🆕
 
 ## Install
 
