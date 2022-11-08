@@ -23,9 +23,6 @@
     "cookie session"
   ],
   "author": "Kori <korinamez@gmail.com>",
-  "dependencies": {
-    "user-agents": "^1.0.1146"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kori-lab/hermes.git"
@@ -38,7 +35,6 @@
     "lib": "lib",
     "test": "tests"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node ."
   },

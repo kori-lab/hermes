@@ -1,8 +1,8 @@
-import Hermes from "@kori_xyz/hermes";
+import Hermes from "../lib/Index.js";
 
 const response = await Hermes({
   url: "https://api.ipify.org/?format=json",
-  proxy: "47.254.153.200:80",
+  proxy: "45.94.47.66:8110",
   timeout: 10000,
 });
 

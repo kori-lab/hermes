@@ -1,4 +1,4 @@
-import { Session } from "./lib/Index.js";
+import { Session } from "../lib/Index.js";
 
 const client = new Session();
 

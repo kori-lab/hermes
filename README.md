@@ -1,7 +1,7 @@
 <div align="center">
     <img src="https://images.vexels.com/media/users/3/190673/isolated/preview/6c2710b0ba8104a74f20b22ce0d93cb6-curso-grego-deus-hermes.png" />
     <h1>powerful and fast</h1>
-    <small>Make simple and fast stealth requests, supporting the recently tls versions and any proxies (auth/port:ip). having feature for random user-agents to make better stealth request</small>
+    <small>Make simple and fast stealth requests, supporting the recently tls versions and any proxies (auth/port:ip). To make better stealth request</small>
 </div>
 <div align="center">
 
@@ -231,9 +231,6 @@ console.log(response.headers["content-type"], response.data.length);
   // `timeout` specifies the number of milliseconds before the request times out.
   // If the request takes longer than `timeout`, the request will be aborted.
   timeout: 1000, // default is `5000` (5 seconds)
-
-  // puts a random user agent for the requesting
-  randomUserAgent: true, // default is `false`
 
   // `proxy` defines the hostname, port, and protocol of the proxy server.
   // You can also define your proxy using the conventional `http_proxy` and

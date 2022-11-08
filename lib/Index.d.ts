@@ -61,7 +61,6 @@ declare interface HermesRequestOptions {
   payload?: string | {};
   proxy?: string | HermesJsonProxy;
   timeout?: number;
-  randomUserAgent?: boolean;
   http2?: boolean;
 }
 
