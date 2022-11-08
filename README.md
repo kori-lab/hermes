@@ -25,7 +25,7 @@
 - [x] Automatic request/payload data parse
 - [x] Random user agent _(incrase stealth)_
 - [x] Requesting `https`, `http` protocols and any method
-- [ ] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) _(comming soon)_
+- [x] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) `🆕`
 
 ## Install
 
@@ -48,6 +48,28 @@ npm install @kori_xyz/hermes
 > this module is avaliable for CommonJS or ESM/Typescript
 
 ### CommonJS
+
+cookie session
+
+```javascript
+const { Session } = require("@kori_xyz/hermes");
+
+const client = new Session();
+
+client
+  .req({
+    url: "https://discord.com",
+  })
+  .then((response) => {
+    console.log(
+      response,
+      /**
+       * cookies saved from previous request (automatic save)
+       */
+      client.cookies
+    );
+  });
+```
 
 using proxy
 
@@ -105,6 +127,26 @@ Request({
 ```
 
 ### ESM/TS
+
+cookie session
+
+```javascript
+import { Session } from "@kori_xyz/hermes";
+
+const client = new Session();
+
+const response = await client.req({
+  url: "https://discord.com",
+});
+
+console.log(
+  response,
+  /**
+   * cookies saved from previous request (automatic save)
+   */
+  client.cookies
+);
+```
 
 using proxy
 
