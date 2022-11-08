@@ -1,4 +1,6 @@
 node_modules/
+tests/
+package-lock.json
 *.log
 *.lock
 test.js

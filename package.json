@@ -1,7 +1,7 @@
 {
   "name": "@kori_xyz/hermes",
   "description": "make a fast requests and simplify your code",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "license": "MIT",
@@ -11,6 +11,7 @@
     "powerful",
     "stealth",
     "simple",
+    "session",
     "simple request",
     "fast request",
     "native request",
@@ -18,7 +19,8 @@
     "small package",
     "https client request",
     "automatic json parser",
-    "media support"
+    "media support",
+    "cookie session"
   ],
   "author": "Kori <korinamez@gmail.com>",
   "dependencies": {
