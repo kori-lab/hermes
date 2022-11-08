@@ -26,6 +26,8 @@
 - [x] Random user agent _(incrase stealth)_
 - [x] Requesting `https`, `http` protocols and any method
 - [x] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie) 🆕
+- [x] Fastest between Axios and Superagent 
+<img src="https://i.imgur.com/ZCPD8wp.png" >
 
 ## Install
 
