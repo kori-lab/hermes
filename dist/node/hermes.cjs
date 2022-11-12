@@ -1,4 +1,4 @@
-// Hermes v1.1.9 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.0 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 'use strict';
 
 const http = require('http');

@@ -1,7 +1,7 @@
 {
   "name": "@kori_xyz/hermes",
   "description": "make a fast requests and simplify your code",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "./lib/Index.js",
   "types": "./lib/Index.d.ts",
   "license": "MIT",
@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "rollup -c -m --bundleConfigAsCjs",
-    "deploy": "yarn build && node update_version.js && npm deploy",
+    "deploy": "yarn build && node update_version.js && npm publish",
     "start": "node ."
   },
   "keywords": [
