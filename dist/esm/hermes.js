@@ -1,4 +1,4 @@
-// Hermes v1.1.7 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.1.8 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 import { request } from 'http';
 import { Agent, request as request$1 } from 'https';
 import { constants, connect } from 'http2';

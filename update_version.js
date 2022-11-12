@@ -12,7 +12,7 @@ _package.version = new_version;
 writeFileSync(path, JSON.stringify(_package, null, 2));
 
 execSync(
-  `git add . && git commit -m "${new_version}" && git publish`
+  `git add . && git commit -m "${new_version}" && git push`
 ).toString();
 
 function incrementVersionNumber(version, delimiter = ".") {
