@@ -16,7 +16,6 @@
 <br />
 
 ## Features
-> obs: I'll redo it in TS to cover both CommonJS and ESM/TS and maybe the browser. Wait!
 - [x] Proxy
   - [x] Http(s)
   - [ ] Socks4/5
