@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "rollup -c -m --bundleConfigAsCjs",
-    "deploy": "yarn build && node update_version.js",
+    "deploy": "node update_version.js",
     "start": "node ."
   },
   "keywords": [
