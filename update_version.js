@@ -5,7 +5,8 @@ const path = "./package.json";
 const _package = JSON.parse(readFileSync(path).toString());
 
 console.log(_package);
-const new_version = incrementVersionNumber(_package.version);
+const old_version = _package.version;
+const new_version = incrementVersionNumber(old_version);
 
 _package.version = new_version;
 
@@ -14,7 +15,7 @@ writeFileSync(path, JSON.stringify(_package, null, 2));
 execSync(`git add . && git commit -m "${new_version}" && git push`).toString();
 
 console.log(
-  `Updated to version ${new_version} from version ${version}\n\nrun: npm publish`
+  `Updated to version ${new_version} from version ${old_version}\n\nrun: npm publish`
 );
 
 function incrementVersionNumber(version, delimiter = ".") {
