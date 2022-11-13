@@ -69,7 +69,6 @@ declare function Request(
 ): Promise<HermesResponse>;
 
 export default Request;
-export function ParseProxy(proxy: string): HermesJsonProxy;
 export class Session {
   declare cookies: string;
 
