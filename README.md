@@ -27,7 +27,7 @@
 - [x] Requesting `https`, `http` protocols and any method
 - [x] Session for automatic [storage cookies](https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Headers/Set-Cookie)
 - [x] Fastest between **Superagent**, **Axios** and **Got**
-      <img src="https://i.imgur.com/uisHOpg.png">
+<img src="https://i.imgur.com/uisHOpg.png">
 
 ## Install
 
