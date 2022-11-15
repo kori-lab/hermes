@@ -1,4 +1,4 @@
-// Hermes v1.2.6 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.7 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 import { request } from 'http';
 import { Agent, request as request$1 } from 'https';
 import { constants, connect } from 'http2';
@@ -12,7 +12,7 @@ const {
 
 class RequestManager {
   constructor() {
-    this.midia_types = ["image", "video", "audio"];
+    this.midia_types = ["image", "video", "audio", "font"];
   }
 
   proxyParse(text) {
@@ -35,7 +35,7 @@ class RequestManager {
     return { host, port, protocol: protocol || "https", username, password };
   }
 
-  proxyTunnel(url, proxy, headers = {}, timeout) {
+  proxyTunnel(url, proxy, headers = {}, timeout = 15000) {
     return new Promise((resolve, reject) => {
       const urlParsed = new URL(url);
       const parsed_proxy =
@@ -71,13 +71,12 @@ class RequestManager {
     });
   }
 
-  parseResponseData(buffer, headers) {
+  parseResponseData(arr_data, headers) {
+    const buffer = Buffer.concat(arr_data);
     var data;
 
     try {
       data = JSON.parse(buffer.toString());
-
-      return data;
     } catch (error) {
       if (
         headers["content-type"] &&
@@ -87,9 +86,9 @@ class RequestManager {
       } else {
         data = buffer.toString();
       }
-
-      return data;
     }
+
+    return data;
   }
 
   async parseOptions(options = {}) {
@@ -105,12 +104,7 @@ class RequestManager {
 
     if (options.http2) {
       if (options.proxy) {
-        options.socket = await this.proxyTunnel(
-          options.url,
-          options.proxy,
-          {},
-          15000
-        );
+        options.socket = await this.proxyTunnel(options.url, options.proxy);
       }
 
       return {
@@ -139,14 +133,11 @@ class RequestManager {
     } else {
       if (options.proxy) {
         options.agent = new Agent({
-          socket: await this.proxyTunnel(
-            options.url,
-            options.proxy,
-            options.headers,
-            options.timeout || 15000
-          ).catch((error) => {
-            throw error;
-          }),
+          socket: await this.proxyTunnel(options.url, options.proxy).catch(
+            (error) => {
+              throw error;
+            }
+          ),
           keepAlive: true,
         });
       } else {
@@ -181,7 +172,7 @@ class RequestManager {
 
 const RequestManager$1 = new RequestManager();
 
-function BaseRequest$1(options) {
+function HTTP(options) {
   return new Promise(async (resolve, reject) => {
     const parsed_options = await RequestManager$1.parseOptions(options);
 
@@ -193,10 +184,7 @@ function BaseRequest$1(options) {
       });
 
       res.on("end", () => {
-        res.data = RequestManager$1.parseResponseData(
-          Buffer.concat(response_data),
-          res.headers
-        );
+        res.data = RequestManager$1.parseResponseData(response_data, res.headers);
 
         resolve(res);
       });
@@ -210,7 +198,7 @@ function BaseRequest$1(options) {
   });
 }
 
-function BaseRequest(options) {
+function HTTPS(options) {
   return new Promise(async (resolve, reject) => {
     const parsed_options = await RequestManager$1.parseOptions(options);
 
@@ -222,10 +210,7 @@ function BaseRequest(options) {
       });
 
       res.on("end", () => {
-        res.data = RequestManager$1.parseResponseData(
-          Buffer.concat(response_data),
-          res.headers
-        );
+        res.data = RequestManager$1.parseResponseData(response_data, res.headers);
 
         resolve(res);
       });
@@ -241,13 +226,13 @@ function BaseRequest(options) {
 
 const { HTTP2_HEADER_STATUS } = constants;
 
-function http2(options) {
+function HTTP2(options) {
   return new Promise(async (resolve) => {
     const parsed_options = await RequestManager$1.parseOptions(options);
     const clientSession = connect(parsed_options.url, parsed_options.client);
     const req = clientSession.request(parsed_options.request);
 
-    req.on("response", (headers, flags) => {
+    req.on("response", (headers) => {
       const response_data = [];
 
       req.on("data", (chunk) => {
@@ -259,13 +244,9 @@ function http2(options) {
         clientSession.close();
 
         resolve({
-          flags,
           status: headers[HTTP2_HEADER_STATUS],
           headers,
-          data: RequestManager$1.parseResponseData(
-            Buffer.concat(response_data),
-            headers
-          ),
+          data: RequestManager$1.parseResponseData(response_data, headers),
         });
       });
     });
@@ -278,10 +259,10 @@ function http2(options) {
 
 function Request(options) {
   return options.http2
-    ? http2(options)
+    ? HTTP2(options)
     : options.url.includes("http:")
-    ? BaseRequest$1(options)
-    : BaseRequest(options);
+    ? HTTP(options)
+    : HTTPS(options);
 }
 
 class Session {

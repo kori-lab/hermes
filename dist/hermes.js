@@ -1,9 +1,9 @@
-// Hermes v1.2.6 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.7 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.hermes = factory(global.http, global.https, global.http2$1));
-})(this, (function (http, https, http2$1) { 'use strict';
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.hermes = factory(global.http, global.https, global.http2));
+})(this, (function (http, https, http2) { 'use strict';
 
   function ownKeys(object, enumerableOnly) {
     var keys = Object.keys(object);
@@ -453,14 +453,14 @@
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  var HTTP2_HEADER_PATH = http2$1.constants.HTTP2_HEADER_PATH,
-    HTTP2_HEADER_METHOD = http2$1.constants.HTTP2_HEADER_METHOD,
-    HTTP2_HEADER_SCHEME = http2$1.constants.HTTP2_HEADER_SCHEME,
-    HTTP2_HEADER_AUTHORITY = http2$1.constants.HTTP2_HEADER_AUTHORITY;
+  var HTTP2_HEADER_PATH = http2.constants.HTTP2_HEADER_PATH,
+    HTTP2_HEADER_METHOD = http2.constants.HTTP2_HEADER_METHOD,
+    HTTP2_HEADER_SCHEME = http2.constants.HTTP2_HEADER_SCHEME,
+    HTTP2_HEADER_AUTHORITY = http2.constants.HTTP2_HEADER_AUTHORITY;
   var RequestManager = /*#__PURE__*/function () {
     function RequestManager() {
       _classCallCheck(this, RequestManager);
-      this.midia_types = ["image", "video", "audio"];
+      this.midia_types = ["image", "video", "audio", "font"];
     }
     _createClass(RequestManager, [{
       key: "proxyParse",
@@ -489,7 +489,7 @@
       value: function proxyTunnel(url, proxy) {
         var _this = this;
         var headers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-        var timeout = arguments.length > 3 ? arguments[3] : undefined;
+        var timeout = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 15000;
         return new Promise(function (resolve, reject) {
           var urlParsed = new URL(url);
           var parsed_proxy = _typeof(proxy) == "object" ? proxy : _this.proxyParse(proxy);
@@ -519,11 +519,11 @@
       }
     }, {
       key: "parseResponseData",
-      value: function parseResponseData(buffer, headers) {
+      value: function parseResponseData(arr_data, headers) {
+        var buffer = Buffer.concat(arr_data);
         var data;
         try {
           data = JSON.parse(buffer.toString());
-          return data;
         } catch (error) {
           if (headers["content-type"] && this.midia_types.some(function (type) {
             return headers["content-type"].includes(type);
@@ -532,8 +532,8 @@
           } else {
             data = buffer.toString();
           }
-          return data;
         }
+        return data;
       }
     }, {
       key: "parseOptions",
@@ -562,7 +562,7 @@
                     break;
                   }
                   _context.next = 7;
-                  return this.proxyTunnel(options.url, options.proxy, {}, 15000);
+                  return this.proxyTunnel(options.url, options.proxy);
                 case 7:
                   options.socket = _context.sent;
                 case 8:
@@ -574,7 +574,7 @@
                       ALPNProtocols: ["h2", "http/1.1"],
                       socket: options.socket
                     },
-                    request: _objectSpread2((_objectSpread2$1 = {}, _defineProperty(_objectSpread2$1, HTTP2_HEADER_AUTHORITY, parsed_url.host), _defineProperty(_objectSpread2$1, HTTP2_HEADER_PATH, parsed_url.pathname || "/"), _defineProperty(_objectSpread2$1, HTTP2_HEADER_SCHEME, parsed_url.protocol.split(":")[0]), _defineProperty(_objectSpread2$1, HTTP2_HEADER_METHOD, http2$1.constants["HTTP2_METHOD_".concat((_options$method = options.method) === null || _options$method === void 0 ? void 0 : _options$method.toUpperCase())]), _defineProperty(_objectSpread2$1, "Content-Type", options !== null && options !== void 0 && options.headers && options !== null && options !== void 0 && options.headers["Content-Type"] ? options === null || options === void 0 ? void 0 : options.headers["Content-Type"] : "text/plain"), _defineProperty(_objectSpread2$1, "Content-Length", buffer.length), _defineProperty(_objectSpread2$1, "Accept", "*/*, image/*"), _objectSpread2$1), options === null || options === void 0 ? void 0 : options.headers)
+                    request: _objectSpread2((_objectSpread2$1 = {}, _defineProperty(_objectSpread2$1, HTTP2_HEADER_AUTHORITY, parsed_url.host), _defineProperty(_objectSpread2$1, HTTP2_HEADER_PATH, parsed_url.pathname || "/"), _defineProperty(_objectSpread2$1, HTTP2_HEADER_SCHEME, parsed_url.protocol.split(":")[0]), _defineProperty(_objectSpread2$1, HTTP2_HEADER_METHOD, http2.constants["HTTP2_METHOD_".concat((_options$method = options.method) === null || _options$method === void 0 ? void 0 : _options$method.toUpperCase())]), _defineProperty(_objectSpread2$1, "Content-Type", options !== null && options !== void 0 && options.headers && options !== null && options !== void 0 && options.headers["Content-Type"] ? options === null || options === void 0 ? void 0 : options.headers["Content-Type"] : "text/plain"), _defineProperty(_objectSpread2$1, "Content-Length", buffer.length), _defineProperty(_objectSpread2$1, "Accept", "*/*, image/*"), _objectSpread2$1), options === null || options === void 0 ? void 0 : options.headers)
                   });
                 case 11:
                   if (!options.proxy) {
@@ -583,7 +583,7 @@
                   }
                   _context.t0 = https.Agent;
                   _context.next = 15;
-                  return this.proxyTunnel(options.url, options.proxy, options.headers, options.timeout || 15000)["catch"](function (error) {
+                  return this.proxyTunnel(options.url, options.proxy)["catch"](function (error) {
                     throw error;
                   });
                 case 15:
@@ -635,7 +635,7 @@
   }();
   var RequestManager$1 = new RequestManager();
 
-  function BaseRequest$1(options) {
+  function HTTP(options) {
     return new Promise( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(resolve, reject) {
         var _parsed_options$paylo;
@@ -654,7 +654,7 @@
                     response_data.push(chunk);
                   });
                   res.on("end", function () {
-                    res.data = RequestManager$1.parseResponseData(Buffer.concat(response_data), res.headers);
+                    res.data = RequestManager$1.parseResponseData(response_data, res.headers);
                     resolve(res);
                   });
                 }).on("error", function (error) {
@@ -675,7 +675,7 @@
     }());
   }
 
-  function BaseRequest(options) {
+  function HTTPS(options) {
     return new Promise( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(resolve, reject) {
         var _parsed_options$paylo;
@@ -694,7 +694,7 @@
                     response_data.push(chunk);
                   });
                   res.on("end", function () {
-                    res.data = RequestManager$1.parseResponseData(Buffer.concat(response_data), res.headers);
+                    res.data = RequestManager$1.parseResponseData(response_data, res.headers);
                     resolve(res);
                   });
                 }).on("error", function (error) {
@@ -715,8 +715,8 @@
     }());
   }
 
-  var HTTP2_HEADER_STATUS = http2$1.constants.HTTP2_HEADER_STATUS;
-  function http2(options) {
+  var HTTP2_HEADER_STATUS = http2.constants.HTTP2_HEADER_STATUS;
+  function HTTP2(options) {
     return new Promise( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(resolve) {
         var _parsed_options$paylo;
@@ -729,9 +729,9 @@
                 return RequestManager$1.parseOptions(options);
               case 2:
                 parsed_options = _context.sent;
-                clientSession = http2$1.connect(parsed_options.url, parsed_options.client);
+                clientSession = http2.connect(parsed_options.url, parsed_options.client);
                 req = clientSession.request(parsed_options.request);
-                req.on("response", function (headers, flags) {
+                req.on("response", function (headers) {
                   var response_data = [];
                   req.on("data", function (chunk) {
                     response_data.push(chunk);
@@ -740,10 +740,9 @@
                     req.close();
                     clientSession.close();
                     resolve({
-                      flags: flags,
                       status: headers[HTTP2_HEADER_STATUS],
                       headers: headers,
-                      data: RequestManager$1.parseResponseData(Buffer.concat(response_data), headers)
+                      data: RequestManager$1.parseResponseData(response_data, headers)
                     });
                   });
                 });
@@ -763,7 +762,7 @@
   }
 
   function Request(options) {
-    return options.http2 ? http2(options) : options.url.includes("http:") ? BaseRequest$1(options) : BaseRequest(options);
+    return options.http2 ? HTTP2(options) : options.url.includes("http:") ? HTTP(options) : HTTPS(options);
   }
 
   var Session = /*#__PURE__*/function () {
