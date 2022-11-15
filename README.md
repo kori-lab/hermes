@@ -28,7 +28,7 @@
 - [x] Already with types
 - [x] **0 dependencies**
 - [x] Fastest between **Superagent**, **Axios** and **Got**
-<img src="https://i.imgur.com/uisHOpg.png">
+      <img src="https://i.imgur.com/uisHOpg.png">
 
 ## Install
 
@@ -227,27 +227,15 @@ console.log(response.headers["content-type"], response.data.length);
   },
 
   // syntax alternative to send payload into the body
-  // method post
-  // only the value is sent, not the key
   payload: 'Country=Foo&City=Bar',
 
   // `timeout` specifies the number of milliseconds before the request times out.
   // If the request takes longer than `timeout`, the request will be aborted.
-  timeout: 1000, // default is `5000` (5 seconds)
+  timeout: 1000,
 
-  // `proxy` defines the hostname, port, and protocol of the proxy server.
-  // You can also define your proxy using the conventional `http_proxy` and
-  // `https_proxy` environment variables. If you are using environment variables
-  // for your proxy configuration, you can also define a `no_proxy` environment
-  // variable as a comma-separated list of domains that should not be proxied.
-  // Use `false` to disable proxies, ignoring environment variables.
-  // `username` and `password` indicates that HTTP Basic auth should be used to connect to the proxy, and
-  // supplies credentials.
-  // This will set an `Proxy-Authorization` header, overwriting any existing
-  // `Proxy-Authorization` custom headers you have set using `headers`.
-  // If the proxy server uses HTTPS, then you must set the protocol to `https`.
+  // `proxy` defines the hostname, port, and protocol of the proxy server or string content  all.
   proxy: {
-    protocol: 'https',
+    protocol: 'https', // default
     host: '127.0.0.1',
     port: 80,
     username: 'foo',
@@ -255,7 +243,7 @@ console.log(response.headers["content-type"], response.data.length);
   },
 
    // support string, automatic parse
-  proxy: 'foo:bar@127.0.0.1:80',
+  proxy: 'https://foo:bar@127.0.0.1:80',
 
   // support http2
   http2: false // defaults
