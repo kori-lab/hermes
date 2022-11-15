@@ -28,7 +28,7 @@
 - [x] Already with types
 - [x] **0 dependencies**
 - [x] Fastest between **Superagent**, **Axios** and **Got**
-      <img src="https://i.imgur.com/uisHOpg.png">
+<img src="https://i.imgur.com/uisHOpg.png">
 
 ## Install
 
