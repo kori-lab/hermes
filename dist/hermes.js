@@ -1,4 +1,4 @@
-// Hermes v1.3.0 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.1 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
@@ -452,6 +452,57 @@
   function _nonIterableRest() {
     throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
+  function _createForOfIteratorHelper(o, allowArrayLike) {
+    var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"];
+    if (!it) {
+      if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") {
+        if (it) o = it;
+        var i = 0;
+        var F = function () {};
+        return {
+          s: F,
+          n: function () {
+            if (i >= o.length) return {
+              done: true
+            };
+            return {
+              done: false,
+              value: o[i++]
+            };
+          },
+          e: function (e) {
+            throw e;
+          },
+          f: F
+        };
+      }
+      throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+    }
+    var normalCompletion = true,
+      didErr = false,
+      err;
+    return {
+      s: function () {
+        it = it.call(o);
+      },
+      n: function () {
+        var step = it.next();
+        normalCompletion = step.done;
+        return step;
+      },
+      e: function (e) {
+        didErr = true;
+        err = e;
+      },
+      f: function () {
+        try {
+          if (!normalCompletion && it.return != null) it.return();
+        } finally {
+          if (didErr) throw err;
+        }
+      }
+    };
+  }
 
   var HTTP2_HEADER_PATH = http2.constants.HTTP2_HEADER_PATH,
     HTTP2_HEADER_METHOD = http2.constants.HTTP2_HEADER_METHOD,
@@ -855,16 +906,26 @@
     }, {
       key: "json",
       value: function json() {
-        this.cookies.split("; ").map(function (c) {
-          return c.trim().split("=").map(decodeURIComponent);
-        }).reduce(function (a, b) {
-          try {
-            a[b[0]] = JSON.parse(b[1]);
-          } catch (e) {
-            a[b[0]] = b[1];
+        var object = {};
+        var _iterator = _createForOfIteratorHelper(this.cookies.split("; ")),
+          _step;
+        try {
+          for (_iterator.s(); !(_step = _iterator.n()).done;) {
+            var cookie = _step.value;
+            var _cookie$split = cookie.split("="),
+              _cookie$split2 = _slicedToArray(_cookie$split, 2),
+              name = _cookie$split2[0],
+              value = _cookie$split2[1];
+            if (name) {
+              object[name] = value;
+            }
           }
-          return a;
-        }, {});
+        } catch (err) {
+          _iterator.e(err);
+        } finally {
+          _iterator.f();
+        }
+        return object;
       }
     }]);
     return Session;
