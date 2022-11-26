@@ -1,4 +1,4 @@
-// Hermes v1.2.7 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.8 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
@@ -813,7 +813,7 @@
           if (this.cookies.includes(cookie.name)) {
             return false;
           } else if (this.cookies) {
-            this.cookies = "; ".concat(cookie.name, "=").concat(cookie.value);
+            this.cookies += "; ".concat(cookie.name, "=").concat(cookie.value);
             return true;
           } else {
             this.cookies = "".concat(cookie.name, "=").concat(cookie.value);
@@ -823,7 +823,7 @@
           if (this.cookies.includes(cookie.split("=")[0])) {
             return false;
           } else if (this.cookies) {
-            this.cookies = "; ".concat(cookie.trim());
+            this.cookies += "; ".concat(cookie.trim());
             return true;
           } else {
             this.cookies = "".concat(cookie.trim());
@@ -851,6 +851,20 @@
           }
         }
         return options;
+      }
+    }, {
+      key: "json",
+      value: function json() {
+        this.cookies.map(function (c) {
+          return c.trim().split("=").map(decodeURIComponent);
+        }).reduce(function (a, b) {
+          try {
+            a[b[0]] = JSON.parse(b[1]);
+          } catch (e) {
+            a[b[0]] = b[1];
+          }
+          return a;
+        }, {});
       }
     }]);
     return Session;

@@ -1,4 +1,4 @@
-// Hermes v1.2.7 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.8 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 import { request } from 'http';
 import { Agent, request as request$1 } from 'https';
 import { constants, connect } from 'http2';
@@ -297,7 +297,7 @@ class Session {
       if (this.cookies.includes(cookie.name)) {
         return false;
       } else if (this.cookies) {
-        this.cookies = `; ${cookie.name}=${cookie.value}`;
+        this.cookies += `; ${cookie.name}=${cookie.value}`;
 
         return true;
       } else {
@@ -309,7 +309,7 @@ class Session {
       if (this.cookies.includes(cookie.split("=")[0])) {
         return false;
       } else if (this.cookies) {
-        this.cookies = `; ${cookie.trim()}`;
+        this.cookies += `; ${cookie.trim()}`;
 
         return true;
       } else {
@@ -341,6 +341,21 @@ class Session {
     }
 
     return options;
+  }
+
+  json() {
+    this.cookies
+      .map(function (c) {
+        return c.trim().split("=").map(decodeURIComponent);
+      })
+      .reduce(function (a, b) {
+        try {
+          a[b[0]] = JSON.parse(b[1]);
+        } catch (e) {
+          a[b[0]] = b[1];
+        }
+        return a;
+      }, {});
   }
 }
 
