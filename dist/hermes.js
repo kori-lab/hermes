@@ -1,4 +1,4 @@
-// Hermes v1.2.8 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.9 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
@@ -855,8 +855,10 @@
     }, {
       key: "json",
       value: function json() {
-        this.cookies.map(function (c) {
+        this.cookies.split("; ").map(function (c) {
           return c.trim().split("=").map(decodeURIComponent);
+        }).filter(function (a) {
+          return a.trim();
         }).reduce(function (a, b) {
           try {
             a[b[0]] = JSON.parse(b[1]);

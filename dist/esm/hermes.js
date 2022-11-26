@@ -1,4 +1,4 @@
-// Hermes v1.2.8 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.2.9 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 import { request } from 'http';
 import { Agent, request as request$1 } from 'https';
 import { constants, connect } from 'http2';
@@ -345,9 +345,11 @@ class Session {
 
   json() {
     this.cookies
+      .split("; ")
       .map(function (c) {
         return c.trim().split("=").map(decodeURIComponent);
       })
+      .filter((a) => a.trim())
       .reduce(function (a, b) {
         try {
           a[b[0]] = JSON.parse(b[1]);
