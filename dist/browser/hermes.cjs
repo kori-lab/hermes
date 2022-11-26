@@ -1,4 +1,4 @@
-// Hermes v1.3.1 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.2 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 'use strict';
 
 var http = require('http');
@@ -119,7 +119,7 @@ class RequestManager {
         },
         request: {
           [HTTP2_HEADER_AUTHORITY]: parsed_url.host,
-          [HTTP2_HEADER_PATH]: parsed_url.pathname || "/",
+          [HTTP2_HEADER_PATH]: parsed_url.pathname + parsed_url.search || "/",
           [HTTP2_HEADER_SCHEME]: parsed_url.protocol.split(":")[0],
           [HTTP2_HEADER_METHOD]:
             http2.constants[`HTTP2_METHOD_${options.method?.toUpperCase()}`],
@@ -231,7 +231,7 @@ const { HTTP2_HEADER_STATUS } = http2.constants;
 function HTTP2(options) {
   return new Promise(async (resolve) => {
     const parsed_options = await RequestManager$1.parseOptions(options);
-    const clientSession = http2.connect(parsed_options.url, parsed_options.client);
+    const clientSession = http2.connect(new URL(parsed_options.url), parsed_options.client);
     const req = clientSession.request(parsed_options.request);
 
     req.on("response", (headers) => {
