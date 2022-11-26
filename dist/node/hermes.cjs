@@ -1,4 +1,4 @@
-// Hermes v1.2.9 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.0 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 'use strict';
 
 const http = require('http');
@@ -351,7 +351,6 @@ class Session {
       .map(function (c) {
         return c.trim().split("=").map(decodeURIComponent);
       })
-      .filter((a) => a.trim())
       .reduce(function (a, b) {
         try {
           a[b[0]] = JSON.parse(b[1]);
