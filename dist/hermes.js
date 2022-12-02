@@ -1,4 +1,4 @@
-// Hermes v1.3.2 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.3 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
@@ -409,8 +409,14 @@
   function _slicedToArray(arr, i) {
     return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest();
   }
+  function _toArray(arr) {
+    return _arrayWithHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableRest();
+  }
   function _arrayWithHoles(arr) {
     if (Array.isArray(arr)) return arr;
+  }
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
   }
   function _iterableToArrayLimit(arr, i) {
     var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
@@ -913,11 +919,11 @@
           for (_iterator.s(); !(_step = _iterator.n()).done;) {
             var cookie = _step.value;
             var _cookie$split = cookie.split("="),
-              _cookie$split2 = _slicedToArray(_cookie$split, 2),
+              _cookie$split2 = _toArray(_cookie$split),
               name = _cookie$split2[0],
-              value = _cookie$split2[1];
+              value = _cookie$split2.slice(1);
             if (name) {
-              object[name] = value;
+              object[name] = value.join("=");
             }
           }
         } catch (err) {

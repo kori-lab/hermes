@@ -1,4 +1,4 @@
-// Hermes v1.3.2 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.3 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 'use strict';
 
 var http = require('http');
@@ -347,11 +347,12 @@ class Session {
 
   json() {
     const object = {};
+
     for (const cookie of this.cookies.split("; ")) {
-      const [name, value] = cookie.split("=");
+      const [name, ...value] = cookie.split("=");
 
       if (name) {
-        object[name] = value;
+        object[name] = value.join("=");
       }
     }
     return object;
