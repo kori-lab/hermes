@@ -1,4 +1,4 @@
-// Hermes v1.3.3 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.4 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 'use strict';
 
 var http = require('http');
@@ -154,7 +154,7 @@ class RequestManager {
           href: parsed_url.href,
           protocol: parsed_url.protocol || "https:",
           hostname: parsed_url.hostname,
-          path: parsed_url.pathname || "/",
+          path: parsed_url.pathname + parsed_url.search || "/",
           port: parsed_url.port || 443,
           method: options.method?.toUpperCase() || "GET",
           maxVersion: "TLSv1.3",
@@ -174,9 +174,15 @@ class RequestManager {
 
 var RequestManager$1 = new RequestManager();
 
-function HTTP(options) {
+function HTTP(options = {}) {
   return new Promise(async (resolve, reject) => {
     const parsed_options = await RequestManager$1.parseOptions(options);
+
+    delete parsed_options.request.agent;
+
+    if (parsed_options.request.port == 443) {
+      delete parsed_options.request.port;
+    }
 
     const req = http.request(parsed_options.request, (res) => {
       const response_data = [];

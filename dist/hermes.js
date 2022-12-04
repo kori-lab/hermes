@@ -1,4 +1,4 @@
-// Hermes v1.3.3 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
+// Hermes v1.3.4 Copyright (c) 2022 Kori <korinamez@gmail.com> and contributors
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('http'), require('https'), require('http2')) :
   typeof define === 'function' && define.amd ? define(['http', 'https', 'http2'], factory) :
@@ -663,7 +663,7 @@
                       href: parsed_url.href,
                       protocol: parsed_url.protocol || "https:",
                       hostname: parsed_url.hostname,
-                      path: parsed_url.pathname || "/",
+                      path: parsed_url.pathname + parsed_url.search || "/",
                       port: parsed_url.port || 443,
                       method: ((_options$method2 = options.method) === null || _options$method2 === void 0 ? void 0 : _options$method2.toUpperCase()) || "GET",
                       maxVersion: "TLSv1.3",
@@ -692,7 +692,8 @@
   }();
   var RequestManager$1 = new RequestManager();
 
-  function HTTP(options) {
+  function HTTP() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
     return new Promise( /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(resolve, reject) {
         var _parsed_options$paylo;
@@ -705,6 +706,10 @@
                 return RequestManager$1.parseOptions(options);
               case 2:
                 parsed_options = _context.sent;
+                delete parsed_options.request.agent;
+                if (parsed_options.request.port == 443) {
+                  delete parsed_options.request.port;
+                }
                 req = http.request(parsed_options.request, function (res) {
                   var response_data = [];
                   res.on("data", function (chunk) {
@@ -719,7 +724,7 @@
                 });
                 if (((_parsed_options$paylo = parsed_options.payload) === null || _parsed_options$paylo === void 0 ? void 0 : _parsed_options$paylo.length) > 0) req.write(parsed_options.payload);
                 req.end();
-              case 6:
+              case 8:
               case "end":
                 return _context.stop();
             }
